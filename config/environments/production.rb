@@ -35,27 +35,26 @@ Rails.application.configure do
   config.log_tags = [:request_id]
 
   # Action Mailer (SMTP)
-  config.action_mailer.delivery_method = :smtp
+config.action_mailer.delivery_method = :smtp
 
-  config.action_mailer.smtp_settings = {
-    address: ENV['SMTP_ADDRESS'],
-    port: 465,
-    user_name: ENV['SMTP_USERNAME'],
-    password: ENV['SMTP_PASSWORD'],
-    authentication: :login,
-    ssl: true,
-    tls: true,
-    enable_starttls_auto: false
-  }
+config.action_mailer.smtp_settings = {
+  address: ENV['SMTP_ADDRESS'],
+  port: ENV.fetch('SMTP_PORT', 587),
+  user_name: ENV['SMTP_USERNAME'],
+  password: ENV['SMTP_PASSWORD'],
+  authentication: :login,
+  enable_starttls_auto: true
+}
 
-  config.action_mailer.default_url_options = {
-    host: ENV['APP_HOST'],
-    protocol: 'https'
-  }
+config.action_mailer.default_url_options = {
+  host: ENV['APP_HOST'],
+  protocol: 'https'
+}
 
-  config.action_mailer.default_options = {
-    from: ENV['MAIL_FROM']
-  }
+config.action_mailer.default_options = {
+  from: ENV['MAIL_FROM']
+}
+
 
   # Enable email error reporting (useful for debugging)
   config.action_mailer.raise_delivery_errors = true
